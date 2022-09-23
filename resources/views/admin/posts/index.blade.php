@@ -1,26 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                     <table class="table table-secondary table-hover">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-secondary table-hover">
                     <thead class="table-success">
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Post Date</th>
+                        <th>Titolo</th>
+                        <th>Autore</th>
+                        <th>Data</th>
+                        <th>Tags</th>
                         <th></th>
                         <th></th>
                         <th></th>
                     </thead>
                     <tbody>
                         @forelse ($posts as $post)
-                            <tr >
+                            <tr>
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
-                                <td>{{ $post->user->name}}</td>
-                                <td>{{ $post->post_date}}</td>
+                                <td>{{ $post->user->name }}</td>
+                                <td>{{ $post->post_date }}</td>
+                                <td>
+                                    @if (isset($post->tags))
+                                        @foreach ($post->tags as $tag)
+                                            #{{ $tag->name }}
+                                        @endforeach
+                                    @else
+                                        Non sono stati selezionati tag per questo post
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('admin.posts.show', $post->id) }}">
                                         <button class="btn btn-sm btn-primary text-light font-weight-bold">Show</button>
@@ -48,7 +58,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                </div>
             </div>
         </div>
+    </div>
 @endsection
