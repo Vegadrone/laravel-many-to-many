@@ -28,6 +28,17 @@
                     <li class="list-group-item">
                         <h5 class="fw-bold">Creato il:</h5>{{ $post->post_date }}
                     </li>
+                     <li class="list-group-item">
+                        <h5 class="fw-bold">I tag di questo post:</h5>
+                        @if (isset($post->tags))
+                        @foreach ($post->tags as $tag)
+                            #{{ $tag->name }}
+                        @endforeach
+                    @else
+                        Non sono stati selezionati tag per questo post
+                    @endif
+                    </li>
+
                 </ul>
             </div>
 
